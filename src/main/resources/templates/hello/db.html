@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DB sample</title>
+</head>
+<body>
+   <h1>Hello DB</h1>
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Age</td>
+        </tr>
+        <tr>
+            <td th:text="${employee.getId()}">ID</td>
+            <td th:text="${employee.getName()}">Name</td>
+            <td th:text="${employee.getAge()}">Age</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <form action="/hello" method="post">
+        Enter: <input type="text" name="text1" th:value="${test}"/>
+        <input type="submit" value="click">
+    </form>
+    <form action="/hello/db" method="post">
+        Employee Id: <input type="text" name="text2"/>
+        <input type="submit" value="Click">
+    </form>
+</body>
+</html>
