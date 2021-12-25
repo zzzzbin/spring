@@ -1,9 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.application.service.UserApplicationService;
+import com.example.demo.domain.user.model.MUser;
+import com.example.demo.domain.user.service.UserService;
 import com.example.demo.form.GroupOrder;
 import com.example.demo.form.SignupForm;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,12 @@ public class SignUpController {
     @Autowired
     private UserApplicationService userApplicationService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     /**
      * Display user signup screen
      */
@@ -43,12 +52,18 @@ public class SignUpController {
                              @Validated(GroupOrder.class) @ModelAttribute SignupForm form,
                              BindingResult bindingResult) {
         //input check result
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             //NG: return the user signup screen
             return getSignup(model, locale, form);
         }
         log.info(form.toString());
         //model.addAttribute("signupForm", form)
+
+        //convert form to MUser class
+        MUser user = modelMapper.map(form, MUser.class);
+
+        //signup: do not pass form classes to service
+        userService.signup(user);
         return "redirect:/login"; //PRG
     }
 
