@@ -4,6 +4,8 @@ import com.example.demo.domain.user.model.MUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface UserMapper {
@@ -11,4 +13,5 @@ public interface UserMapper {
      * User signup
      */
     int insertOne(MUser user);
+    List<MUser> findMany();
 }
