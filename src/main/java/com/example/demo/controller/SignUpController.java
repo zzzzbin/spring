@@ -23,7 +23,7 @@ public class SignUpController {
     public String getSignup(Model model) {
         Map<String, Integer> genderMap = userApplicationService.getGenderMap();
         model.addAttribute("genderMap", genderMap);
-        return "user/singup";
+        return "user/signup";
     }
 
     /**
