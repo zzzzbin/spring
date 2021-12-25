@@ -9,48 +9,50 @@
     <!-- Read JS -->
     <script th:src="@{/webjars/jquery/jquery.min.js}" defer></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
-    <title> User Signup</title>
+    <title th:text="#{user.signup.title}"></title>
 </head>
 <body class="bg-light">
-<form id="signup-from" action="/user/singup" method="post" class="form-signup">
-    <h1 class="text-center">User Signup</h1>
-<!--    User ID-->
+<form id="signup-form" action="/user/singup" method="post" class="form-signup">
+    <h1 class="text-center" th:text="#{user.signup.title}">User Signup</h1>
+    <!--    User ID-->
     <div class="form-group">
-        <label for="userId">User ID</label>
+        <label for="userId" th:text="#{userId}">User ID</label>
         <input type="text" class="form-control"/>
     </div>
-<!--    Password-->
+    <!--    Password-->
     <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password" th:text="#{password}">Password</label>
         <input type="text" class="form-control">
     </div>
     <!--    UserName-->
     <div class="form-group">
-        <label for="userName">User Name</label>
+        <label for="userName" th:text="#{userName}">User Name</label>
         <input type="text" class="form-control">
     </div>
 
     <!--    Birthday-->
     <div class="form-group">
-        <label for="birthday">Birthday</label>
+        <label for="birthday" th:text="#{birthday}">Birthday</label>
         <input type="text" class="form-control">
     </div>
 
     <!--    Age-->
     <div class="form-group">
-        <label for="age">Age</label>
+        <label for="age" th:text="#{age}">Age</label>
         <input type="text" class="form-control">
     </div>
 
 
     <!--    Gender-->
     <div class="form-group">
-        <label for="gender">Gender</label>
-        <input type="text" class="form-control">
+        <div th:each="item: ${genderMap}" class="form-check-inline">
+            <input type="radio" class="form-check-input" th:value="${item.value}">
+            <label class="form-check-label" th:text="${item.key}">Gender</label>
+        </div>
     </div>
-<!--    Signup button-->
+    <!--    Signup button-->
 
-    <input type="submit" value="signup" class="btn btn-primary w-100 mt-3"/>
+    <input type="submit" th:value="#{user.signup.btn}" class="btn btn-primary w-100 mt-3"/>
 
 </form>
 </body>
