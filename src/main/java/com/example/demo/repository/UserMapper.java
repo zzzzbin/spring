@@ -13,5 +13,8 @@ public interface UserMapper {
      * User signup
      */
     int insertOne(MUser user);
+
     List<MUser> findMany();
+
+    MUser findOne(String userId);
 }

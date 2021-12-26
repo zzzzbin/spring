@@ -7,4 +7,5 @@ import java.util.List;
 public interface UserService {
     void signup(MUser user);
     List<MUser> getUsers();
+    MUser getUserByUserId(String userId);
 }
