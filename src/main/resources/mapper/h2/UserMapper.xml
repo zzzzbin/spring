@@ -28,10 +28,10 @@
         select * from m_user
         <where>
             <if test="userId!=null and userId != ''">
-               and user_id like '%'||#{userId}||'%'
+                and user_id like '%'||#{userId}||'%'
             </if>
             <if test="userName!=null and userName != ''">
-               and user_name like '%'||#{userName}||'%'
+                and user_name like '%'||#{userName}||'%'
             </if>
         </where>
     </select>
@@ -46,11 +46,19 @@
         <result column="gender" property="gender"/>
         <result column="department_id" property="departmentId"/>
         <result column="role"/>
+        <association property="department" resultMap="department"></association>
+    </resultMap>
+
+    <!-- Mapping definition (department) -->
+    <resultMap type="com.example.demo.domain.user.model.Department" id="department">
+        <id column="department_id" property="departmentId"/>
+        <result column="department_name" property="departmentName"/>
     </resultMap>
     <!-- Get user(1record) -->
     <select id="findOne" resultMap="user">
         select *
         from m_user
+            left join m_department md on m_user.department_id = md.department_id
         where user_id = #{userId}
     </select>
 
