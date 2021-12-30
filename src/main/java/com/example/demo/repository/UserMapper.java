@@ -15,7 +15,7 @@ public interface UserMapper {
      */
     int insertOne(MUser user);
 
-    List<MUser> findMany();
+    List<MUser> findMany(MUser user);
 
     MUser findOne(String userId);
 
@@ -24,4 +24,6 @@ public interface UserMapper {
                    @Param("userName") String userName);
 
     int deleteOne(@Param("userId") String userId);
+
+
 }
