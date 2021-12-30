@@ -1,7 +1,7 @@
 spring:
   # Templates reloading during development
   thymeleaf:
-    prefix: file:src/main/resources/templates/
+    prefix: classpath:/templates/
     cache: false
 
   # Static resources reloading during development

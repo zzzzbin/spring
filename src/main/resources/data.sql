@@ -26,7 +26,7 @@ department_id
 /* Salary table */
 INSERT INTO t_salary (
 user_id
-, year_month
+, year_months
 , salary
 ) VALUES
 ('user@co.jp' , '11/2020' , 2800)
