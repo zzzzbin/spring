@@ -14,6 +14,7 @@
     </div>
     <form id="user-detail-form" method="post" th:action="@{/user/detail}"
           class="forms-signup" th:object="${userDetailForm}">
+        <input type="hidden" th:field="*{userId}">
         <!--        User details information-->
         <table class="table table-striped table-bordered table-hover">
             <tbody>
@@ -38,7 +39,7 @@
                 <td th:text="*{#dates.format(birthday, 'dd/MM/YYYY')}"></td>
             </tr>
             <tr>
-                <th>Birthday</th>
+                <th>Age</th>
                 <td th:text="*{age}"></td>
             </tr>
             <tr>
@@ -48,6 +49,13 @@
             </tbody>
         </table>
 
+        <!--        Button area-->
+        <div class="text-center">
+            <!--            Delete button-->
+            <button class="btn btn-danger" type="submit" name="delete">delete</button>
+            <!--            Update button -->
+            <button class="btn btn-primary" type="submit" name="update">update</button>
+        </div>
     </form>
 </div>
 </body>

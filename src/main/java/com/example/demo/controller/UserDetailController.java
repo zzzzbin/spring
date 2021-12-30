@@ -7,9 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -28,4 +26,21 @@ public class UserDetailController {
         model.addAttribute("userDetailForm", form);
         return "user/detail";
     }
+
+    //    User update process
+    @PostMapping(value = "/detail", params = "update")
+    public String updateUser(@ModelAttribute UserDetailForm form, Model model) {
+        //update user
+        userService.updateUserOne(form.getUserId(), form.getPassword(), form.getUserName());
+        //redirect to user list screen
+        return "redirect:/user/list";
+    }
+
+    // User delete process
+    @PostMapping(value = "/detail", params = "delete")
+    public String deleteUser(UserDetailForm form, Model model) {
+        userService.deleteUserOne(form.getUserId());
+        return "redirect:/user/list";
+    }
+
 }
