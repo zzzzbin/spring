@@ -47,4 +47,9 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
  - JoinPoint time: before, after, afterReturning, around, afterThrowing (compare with Advice). 
  (call the method => return or exception) https://blog.espenberntsen.net/2010/03/20/aspectj-cheat-sheet/
  
+ ## Exception handling: 3 ways
+ 
+  - in the @AfterThrowing aspect
+  - for each controller class
+  - for entire webapp
  
