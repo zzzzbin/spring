@@ -21,3 +21,21 @@
 ```
 ## ref
 https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
+
+## Transaction:
+
+- Isolation(independence) level:
+  + READ_UNCOMMITTED: you can read data that is not committed by other transactions. 
+  If it is rolled back, invalid data is searched.
+  + READ_COMMITTED: data that has not been committed by other transactions cannot be read
+  + REPEATABLE_READ: if data is read multiple times within a transaction, the same value is read
+  even if other transaction changed data in the middle
+  + SERIALIZABLE: process transactions one by one.
+  => 3 problems:
+  + Dirty read: read the data before commit
+  + Non-repeatable read: read the same data many times in a transaction, at the same time, another transaction
+   update the data => data change will be change in the middle
+  + Phantom read: read the same data many times in a transaction. At the same time another transaction
+  adds new data => number of records to be processed will be increased in the middle of transaction.
+ - Propagation level: it determines whether or not a new transaction is created and started.
+ 
