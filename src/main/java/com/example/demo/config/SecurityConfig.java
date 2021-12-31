@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,5 +41,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //disable CSRF (temporary)
         http.csrf().disable();
+    }
+
+    /**Authentication setting**/
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //In-memory authentication
+        auth
+            .inMemoryAuthentication()
+                .withUser("user") //add user
+                    .password("user")
+                    .roles("GENERAL")
+                .and()
+                .withUser("admin") //add admin
+                    .password("admin")
+                    .roles("ADMIN");
     }
 }
