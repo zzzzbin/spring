@@ -47,6 +47,7 @@
         <result column="department_id" property="departmentId"/>
         <result column="role"/>
         <association property="department" resultMap="department"></association>
+        <collection property="salaryList" resultMap="salary" columnPrefix="salary_"></collection>
     </resultMap>
 
     <!-- Mapping definition (department) -->
@@ -54,12 +55,32 @@
         <id column="department_id" property="departmentId"/>
         <result column="department_name" property="departmentName"/>
     </resultMap>
+
+    <!--    Mapping definition (salary)-->
+    <resultMap id="salary" type="com.example.demo.domain.user.model.Salary">
+        <id column="user_id" property="userId"></id>
+        <id column="year_months" property="yearMonths"></id>
+        <result column="salary" property="salary"></result>
+    </resultMap>
+
     <!-- Get user(1record) -->
     <select id="findOne" resultMap="user">
-        select *
-        from m_user
-            left join m_department md on m_user.department_id = md.department_id
-        where user_id = #{userId}
+        select
+               mu.user_id,
+               mu.password,
+               mu.user_name,
+               mu.birthday,
+               mu.age,
+               mu.gender,
+               md.department_id,
+               md.department_name,
+               ts.user_id as salary_user_id,
+               ts.year_months as salary_year_months,
+               ts.salary as salary_salary
+        from m_user mu
+            left join m_department md on mu.department_id = md.department_id
+            left join t_salary ts on mu.user_id = ts.user_id
+        where mu.user_id = #{userId}
     </select>
 
     <!-- Update user -->

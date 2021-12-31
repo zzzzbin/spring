@@ -23,6 +23,8 @@ public class UserDetailController {
         MUser user = userService.getUserByUserId(userId);
 
         form = modelMapper.map(user, UserDetailForm.class);
+        form.setSalaryList(user.getSalaryList()); //Model mapper cannot copy List
+
         model.addAttribute("userDetailForm", form);
         return "user/detail";
     }
