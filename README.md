@@ -39,3 +39,12 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
   adds new data => number of records to be processed will be increased in the middle of transaction.
  - Propagation level: it determines whether or not a new transaction is created and started.
  
+ ## AOP terminology
+ 
+ - Advice: it is the processing content to be executed in AOP
+ - Pointcut: the object(class or method) on which the operation is to be performed.
+ - JoinPoint: the timing at which processing is executed.
+ - JoinPoint time: before, after, afterReturning, around, afterThrowing (compare with Advice). 
+ (call the method => return or exception) https://blog.espenberntsen.net/2010/03/20/aspectj-cheat-sheet/
+ 
+ 
