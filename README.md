@@ -52,4 +52,10 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
   - in the @AfterThrowing aspect
   - for each controller class
   - for entire webapp
+  
+ ## Spring security
+ 
+  - Authentication: Only users who have logged in can use the various functions.
+  - Authorization: is a function restriction by authority. ex you can block access to specific URLs
+  
  
