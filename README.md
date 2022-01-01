@@ -61,5 +61,21 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
  ## CSRF
  - Website created with spring will now include tokens. A token is a random string. If you send a request without a token, it will be considered as an external request.
  As a result, the request is rejected.
-  
+ 
+ ## jquery
+ 
+ - $(selector).action();
+ - $(document).ready(function(){}); ~ $(function(){});
+ ```js
+    'regular' jquery code
+    $(function(){ 
+        // my jquery code here
+    });
+
+    'plug-in code'
+    (function($){ 
+        //the plugin code here 
+    })(jQuery); 
+```
+ - 
  

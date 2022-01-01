@@ -6,6 +6,8 @@
     <title>User List</title>
     <!--    Read Dedicated CSS-->
     <link rel="stylesheet" th:href="@{/css/user/list.css}">
+    <!--    Read JS-->
+    <script th:src="@{/js/user/detail.js}" defer></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -80,6 +82,12 @@
             <button class="btn btn-danger" type="submit" name="delete">delete</button>
             <!--            Update button -->
             <button class="btn btn-primary" type="submit" name="update">update</button>
+        </div>
+
+        <!--        REST button area-->
+        <div class="text-center mt-2">
+            <button id="btn-delete" type="button" class="btn btn-danger" >delete(REST)</button>
+            <button id="btn-update" type="button" class="btn btn-primary">update(REST)</button>
         </div>
     </form>
 </div>
