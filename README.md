@@ -57,5 +57,9 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
  
   - Authentication: Only users who have logged in can use the various functions.
   - Authorization: is a function restriction by authority. ex you can block access to specific URLs
+ 
+ ## CSRF
+ - Website created with spring will now include tokens. A token is a random string. If you send a request without a token, it will be considered as an external request.
+ As a result, the request is rejected.
   
  
