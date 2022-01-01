@@ -47,7 +47,7 @@ public class SignUpController {
     /**
      * User signup process
      */
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public String postSignup(Model model, Locale locale,
                              @Validated(GroupOrder.class) @ModelAttribute SignupForm form,
                              BindingResult bindingResult) {

@@ -10,4 +10,5 @@ public interface UserService {
     MUser getUserByUserId(String userId);
     void updateUserOne(String userId, String password, String userName);
     void deleteUserOne(String userId);
+    MUser getLoginUser(String userId);
 }
