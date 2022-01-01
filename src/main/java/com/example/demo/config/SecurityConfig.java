@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -42,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll() //direct link OK
                 .antMatchers("/user/signup").permitAll() //direct link OK
                 .anyRequest().authenticated(); //otherwise direct link is NG
-
+        //login process
         http
             .formLogin()
                 .loginProcessingUrl("/login") //login process path
@@ -51,6 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userId")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/user/list",true);
+
+        //logout process
+        http
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout");
 
         //disable CSRF (temporary)
         http.csrf().disable();
