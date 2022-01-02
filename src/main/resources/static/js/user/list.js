@@ -11,7 +11,7 @@ function search() {
         dataType: 'json',
         contentType: 'application/json; charset=UTF-8',
         cache: false,
-        timeout: 5000,
+        timeout: 15000,
     }).done(function (data) {
         //ajax success
         console.log(data);
@@ -86,6 +86,39 @@ $(function () {
             // Processing to be executed regardless of success or failure
             .always(function (data, status, errorThrown) { // None
             })
+    });
+
+    /** Event when the download button (zip) is pressed. */
+    $('#download-zip').click(function(e) {
+        // Cancel normal action
+        e.preventDefault();
+        // Get form value (CSRF measures)
+        var formData = $('#download-form').serializeArray();
+        // File download with ajax
+        $.ajax({
+            type: 'post',
+            url: '/user/list/download/zip',
+            data: formData,
+            xhrFields:{
+                responseType: 'blob'
+            },
+        })
+            // Processing when ajax is successful
+            .done(function( data, status, jqXHR ) { // File name
+                var fileName = 'sample.zip'; // Blob creation
+                const blob = new Blob([data], {type: data.type});
+                // Calling a file save function
+                fileSave(data, fileName);
+            })
+                 // Processing when ajax fails
+            .fail(function( jqXHR, status, errorThrown ) {
+                alert('File download failure');
+            })
+            // Processing to be executed regardless of success or failure
+            .always(function( data, status, errorThrown ) {
+                // None
+            })
+
     });
 });
 

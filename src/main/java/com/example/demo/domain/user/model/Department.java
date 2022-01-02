@@ -13,4 +13,9 @@ public class Department {
     @Id
     private Integer departmentId;
     private String departmentName;
+
+    /** CSV string creation. */
+    public String toCsv() {
+        String csv = departmentId + ", " + departmentName + "\r\n"; return csv;
+    }
 }

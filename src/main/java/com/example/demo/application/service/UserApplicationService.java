@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,5 +74,32 @@ public class UserApplicationService {
         File file = resource.getFile();
         // Get byte array
         return Files.readAllBytes(file.toPath());
+    }
+
+    /**
+     * Create CSV for department list
+     */
+    public void saveDepartmentCsv(List<MUser> userList, String fileName) throws IOException {
+        // CSV string creation
+        StringBuilder sb = new StringBuilder();
+        for (MUser user : userList) {
+            sb.append(user.getDepartment().toCsv());
+        }
+        // Create file save destination path
+        Path path = Paths.get(filePath + SEPARATOR + fileName);
+
+        // byte array creation
+        byte[] bytes = sb.toString().getBytes();
+        // File writing
+        Files.write(path, bytes);
+    }
+
+    /**
+     * Get InputStream
+     */
+    public InputStream getInputStream(String fileName) throws IOException { // Path
+        String path = "file:" + filePath + SEPARATOR + fileName; // Get Resource
+        Resource resource = resourceLoader.getResource(path); // Get InputStream
+        return resource.getInputStream(); //required when creating a zip file
     }
 }

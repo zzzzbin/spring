@@ -25,7 +25,8 @@ public class MUser {
     //department is not included in inserta and update user
     private Department department; //owner side
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany
+    @JoinColumn(insertable = false, updatable = false, name = "userId")
     private List<Salary> salaryList;
 
     //creating a CSV string

@@ -13,8 +13,4 @@ public class Salary {
     @EmbeddedId
     private SalaryKey salaryKey;
     private Integer salary;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(insertable = false, updatable = false, name = "userId")
-    private MUser user;
 }
