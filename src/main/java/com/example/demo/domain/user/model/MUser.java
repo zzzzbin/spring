@@ -22,6 +22,7 @@ public class MUser {
     @ManyToOne(optional = true) //allow null => left join , optional specifies how to join(left, inner)
     @JoinColumn(insertable = false, updatable = false, name = "departmentId") //department is not included in inserta and update user
     private Department department; //owner side
-    @Transient
+
+    @OneToMany(mappedBy = "user")
     private List<Salary> salaryList;
 }
