@@ -54,7 +54,8 @@ public class UserServiceJPAImpl implements UserService {
     @Transactional
     @Override
     public void updateUserOne(String userId, String password, String userName) {
-
+        String encryptPassword = passwordEncoder.encode(password);
+        userRepository.updateUser(userId, encryptPassword, userName);
     }
 
     @Override
@@ -64,8 +65,6 @@ public class UserServiceJPAImpl implements UserService {
 
     @Override
     public MUser getLoginUser(String userId) {
-        Optional<MUser> option = userRepository.findById(userId);
-        MUser mUser = option.orElse(null);
-        return mUser;
+        return userRepository.findLoginUser(userId);
     }
 }
