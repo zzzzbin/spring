@@ -8,9 +8,9 @@
     <link rel="stylesheet" th:href="@{/css/user/list.css}">
 
     <!-- Read JS -->
-    <link rel ="stylesheet" th:href ="@{/webjars/datatables/css/jquery.dataTables.min.css}" >
-    <script th:src ="@{/webjars/datatables/js/jquery.dataTables.min.js}" defer ></script>
-    <script th:src ="@{/js/user/list.js}" defer ></script>
+    <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.min.css}">
+    <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" defer></script>
+    <script th:src="@{/js/user/list.js}" defer></script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -20,7 +20,7 @@
     <!--    Search-->
     <div class="mb-4">
         <form id="user-search-form" method="post" th:action="@{/user/list}"
-            class="form-inline" th:object="${userListForm}"
+              class="form-inline" th:object="${userListForm}"
         >
             <div class="form-group">
                 <label class="mr-2" for="userId">User ID</label>
@@ -62,22 +62,36 @@
             </tbody>
         </table>
     </div>
-<!--    List display(REST)-->
+    <!--    List display(REST)-->
     <div>
         <table id="user-list-table"
-        class="table table-striped table-bordered table-hover w-100">
+               class="table table-striped table-bordered table-hover w-100">
             <thead>
-                <tr>
-                    <th class="th-with">User ID</th>
-                    <th class="th-with">User Name</th>
-                    <th class="th-with">Birthday</th>
-                    <th class="th-with">Age</th>
-                    <th class="th-with">Gender</th>
-                    <th class="th-with"></th>
-                </tr>
+            <tr>
+                <th class="th-with">User ID</th>
+                <th class="th-with">User Name</th>
+                <th class="th-with">Birthday</th>
+                <th class="th-with">Age</th>
+                <th class="th-with">Gender</th>
+                <th class="th-with"></th>
+            </tr>
             </thead>
         </table>
     </div>
+    <!-- FileDL -->
+    <form id="download-form" method="post"
+          th:action="@{/user/list/download}" class="form-inline">
+        <button type="submit" class="btn btn-primary">
+            download
+        </button>
+
+        <button id="download-java-script" class="btn btn-primary ml-3">
+            download(JS)
+        </button>
+        <button id="download-jquery" class="btn btn-primary ml-3">
+            download(jQuery)
+        </button>
+    </form>
 </div>
 </body>
 </html>
