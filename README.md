@@ -77,5 +77,11 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
         //the plugin code here 
     })(jQuery); 
 ```
- - 
+ ## JPA join
+ 
+ - The owner of the relationship is wherever the foreign key is in == wherever joinColumn keyword is in
+ - mappedBy keyword will be on the primaryKey side... and points to the owner side (foreignKey side). And its value is the FIELD NAME, not the entity name.
+ - ALL OF THIS "LINKING HELL" IS TO ACHIEVE BIDIRECTIONAL RELATIONSHIP BETWEEN ENTITIES 
+
+ 
  

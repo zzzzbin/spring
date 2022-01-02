@@ -2,10 +2,7 @@ package com.example.demo.domain.user.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +19,9 @@ public class MUser {
     private Integer gender;
     private Integer departmentId;
     private String role;
-    @Transient
-    private Department department;
+    @ManyToOne(optional = true) //allow null => left join , optional specifies how to join(left, inner)
+    @JoinColumn(insertable = false, updatable = false, name = "departmentId") //department is not included in inserta and update user
+    private Department department; //owner side
     @Transient
     private List<Salary> salaryList;
 }
