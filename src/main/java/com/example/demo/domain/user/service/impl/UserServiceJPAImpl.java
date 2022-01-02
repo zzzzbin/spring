@@ -6,6 +6,8 @@ import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +43,13 @@ public class UserServiceJPAImpl implements UserService {
 
     @Override
     public List<MUser> getUsers(MUser user) {
-        return userRepository.findAll();
+        //Search condition
+        ExampleMatcher exampleMatcher = ExampleMatcher
+                .matching()//and condition
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)//like clause
+                .withIgnoreCase();
+
+        return userRepository.findAll(Example.of(user, exampleMatcher));
     }
 
     @Override
