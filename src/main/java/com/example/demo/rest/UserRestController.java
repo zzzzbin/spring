@@ -5,6 +5,7 @@ import com.example.demo.domain.user.service.UserService;
 import com.example.demo.form.GroupOrder;
 import com.example.demo.form.SignupForm;
 import com.example.demo.form.UserDetailForm;
+import com.example.demo.form.UserListForm;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -65,6 +67,16 @@ public class UserRestController {
     public int deleteUser(UserDetailForm form){
         userService.deleteUserOne(form.getUserId());
         return 0;
+    }
+
+    //user search
+    @GetMapping("/get/list")
+    public List<MUser> getUserList(UserListForm form){
+        MUser user = modelMapper.map(form, MUser.class);
+
+        //get user list
+        List<MUser> users = userService.getUsers(user);
+        return users;
     }
 
 }
