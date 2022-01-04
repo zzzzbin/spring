@@ -41,11 +41,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/login").permitAll() //direct link OK
-                .antMatchers("/user/signup").permitAll() //direct link OK
-                .antMatchers("/user/signup/rest").permitAll()
-                .antMatchers("/admin").hasAnyAuthority("ROLE_ADMIN") //Authority control
-                .anyRequest().authenticated(); //otherwise direct link is NG
+                .antMatchers("/**").permitAll(); //disable security check
+//                .antMatchers("/login").permitAll() //direct link OK
+//                .antMatchers("/user/signup").permitAll() //direct link OK
+//                .antMatchers("/user/signup/rest").permitAll()
+//                .antMatchers("/admin").hasAnyAuthority("ROLE_ADMIN") //Authority control
+//                .anyRequest().authenticated(); //otherwise direct link is NG
         //login process
         http
             .formLogin()
@@ -64,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout");
 
         //disable CSRF (temporary)
-//        http.csrf().disable();
+        http.csrf().disable();
     }
 
     /**Authentication setting**/

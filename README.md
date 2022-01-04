@@ -83,5 +83,25 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
  - mappedBy keyword will be on the primaryKey side... and points to the owner side (foreignKey side). And its value is the FIELD NAME, not the entity name.
  - ALL OF THIS "LINKING HELL" IS TO ACHIEVE BIDIRECTIONAL RELATIONSHIP BETWEEN ENTITIES 
 
+ ## REST client vscode
+ GET http://localhost:8080/products
  
+ ###
+ GET http://localhost:8080/products/2
+ 
+ ### 
+ GET http://localhost:8080/products/paging?page=1&size=3
+ 
+ ###
+ DELETE  http://localhost:8080/products/2
+ 
+ ###
+ POST http://localhost:8080/products
+ content-type: application/json
+ 
+ {
+     "name": "laptop",
+     "price": 5000
+ }
+
  
