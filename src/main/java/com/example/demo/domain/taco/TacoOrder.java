@@ -2,6 +2,7 @@ package com.example.demo.domain.taco;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -11,8 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@Entity
 public class TacoOrder implements Serializable {
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     //delivery information
     @NotBlank(message="Delivery name is required")
@@ -27,15 +31,21 @@ public class TacoOrder implements Serializable {
     private String deliveryZip;
     //payment information
     private String ccNumber;
-    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$", message="Must be formatted MM/YY")
+//    @Pattern(regexp="^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$", message="Must be formatted MM/YY")
     private String ccExpiration;
     @Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
     private Date placedAt;
 
+    @OneToMany
     private List<Taco> tacos = new ArrayList<>();
 
-    public void addTaco(Taco taco) {
-        this.tacos.add(taco);
+    public void addDesign(Taco design) {
+        this.tacos.add(design);
+    }
+
+    @PrePersist
+    void placedAt() {
+        this.placedAt = new Date();
     }
 }
