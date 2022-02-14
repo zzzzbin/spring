@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.domain.mapping.Instructor;
+import com.example.demo.domain.mapping.InstructorDetail;
 import com.example.demo.domain.taco.Ingredient;
 import com.example.demo.repository.IngredientRepository;
+import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +22,16 @@ public class DemoApplication implements CommandLineRunner {
     @Autowired
     IngredientRepository repo;
 
+    @Autowired
+    InstructorRepository instructorRepository;
+
     @Override
     public void run(String... args) throws Exception {
+        Instructor instructor = new Instructor("Trung", "Nguyen","trungnguyen@gmail.com");
+        InstructorDetail instructorDetail = new InstructorDetail("http://trungnguyen.com", "Love to code");
+        instructor.setInstructorDetail(instructorDetail);
+        instructorRepository.save(instructor);
+        instructorRepository.delete(instructor);
         repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
         repo.save(new Ingredient("COTO", "Corn Tortilla", Type.WRAP));
         repo.save(new Ingredient("GRBF", "Ground Beef", Type.PROTEIN));
