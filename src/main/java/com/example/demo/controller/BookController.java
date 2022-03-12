@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.domain.book.Book;
+import com.example.demo.exception.BookNotFoundException;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookService;
 import io.swagger.annotations.Api;
@@ -33,5 +34,10 @@ public class BookController {
     @ApiOperation(value = "Delete book api")
     public List<Book> deleteBook(int bookId) {
         return bookService.removeBook(bookId);
+    }
+
+    @GetMapping("/searchBook/{bookId}/price")
+    public double testGetPrice(@PathVariable int bookId) throws BookNotFoundException {
+       return bookService.getPrice(bookId);
     }
 }
