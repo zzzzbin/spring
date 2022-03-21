@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.domain.mapping.Instructor;
 import com.example.demo.domain.mapping.InstructorDetail;
 import com.example.demo.domain.taco.Ingredient;
+import com.example.demo.dto.Droid;
 import com.example.demo.repository.IngredientRepository;
 import com.example.demo.repository.InstructorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.domain.taco.Ingredient.Type;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 
@@ -18,6 +21,12 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync
 @ConfigurationPropertiesScan
 public class DemoApplication implements CommandLineRunner {
+
+    @Bean
+    @ConfigurationProperties(prefix = "droid")
+    Droid createDroid() {
+        return new Droid();
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -31,7 +40,7 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Instructor instructor = new Instructor("Trung", "Nguyen","trungnguyen@gmail.com");
+        Instructor instructor = new Instructor("Trung", "Nguyen", "trungnguyen@gmail.com");
         InstructorDetail instructorDetail = new InstructorDetail("http://trungnguyen.com", "Love to code");
         instructor.setInstructorDetail(instructorDetail);
         instructorRepository.save(instructor);
