@@ -10,11 +10,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.demo.domain.taco.Ingredient.Type;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 
 @SpringBootApplication
 @EnableAsync
+@ConfigurationPropertiesScan
 public class DemoApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
