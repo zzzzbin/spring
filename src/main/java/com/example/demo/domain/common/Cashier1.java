@@ -46,7 +46,7 @@ public class Cashier1 implements ApplicationEventPublisherAware {
     }
 
     public void checkout(ShoppingCart cart) throws IOException {
-        writer.write(new Date() + "\t" + cart.getItems() + "\r\n");
+//        writer.write(new Date() + "\t" + cart.getItems() + "\r\n");
         writer.flush();
         System.out.println("Open file");
         CheckoutEvent checkoutEvent = new CheckoutEvent(cart, new Date());
