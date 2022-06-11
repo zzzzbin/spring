@@ -103,5 +103,7 @@ https://www.youtube.com/watch?v=PAQvxqocb6A&ab_channel=CodingBoot
      "name": "laptop",
      "price": 5000
  }
-
  
+```
+ @Value("${key:default_value}")
+```

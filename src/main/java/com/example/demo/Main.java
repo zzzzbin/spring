@@ -4,8 +4,10 @@ import com.example.demo.domain.common.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.io.IOException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.example.demo.domain.common");
 //        SequenceGenerator bean = context.getBean(SequenceGenerator.class);
 //        System.out.println(bean.getSequence());
@@ -30,6 +32,5 @@ public class Main {
         ShoppingCart cart2 = context.getBean("shoppingCart", ShoppingCart.class);
         cart2.addItem(dvdrw);
         System.out.println("Shopping cart 2 contains " + cart2.getItems());
-
     }
 }

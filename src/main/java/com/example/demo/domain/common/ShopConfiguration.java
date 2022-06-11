@@ -1,10 +1,16 @@
 package com.example.demo.domain.common;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @Configuration
+@PropertySource("classpath:discounts.properties")
 public class ShopConfiguration {
+    @Value("${endofyear.discount:0.0}")
+    private Double specialEndofyearDiscountField;
+
     @Bean
     public Product aaa() {
         Battery p1 = new Battery();
@@ -16,7 +22,7 @@ public class ShopConfiguration {
 
     @Bean
     public Product cdrw() {
-        Disc p2 = new Disc("CD-RW", 1.5);
+        Disc p2 = new Disc("CD-RW", specialEndofyearDiscountField);
         p2.setCapacity(700);
         return p2;
     }
