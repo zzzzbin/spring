@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+import java.util.HashMap;
+
 @Configuration
 @PropertySource("classpath:discounts.properties")
 public class ShopConfiguration {
@@ -35,11 +37,43 @@ public class ShopConfiguration {
     }
 
     @Bean(initMethod = "openFile", destroyMethod = "closeFile")
-    public Cashier cashier(){
+    public Cashier cashier() {
         String path = System.getProperty("java.io.tmpdir") + "/cashier";
         Cashier c1 = new Cashier();
         c1.setFileName("checkout");
         c1.setPath(path);
         return c1;
     }
+
+    @Bean
+    public Product aaa1() {
+        return ProductCreator.createProduct("aaa");
+    }
+
+    @Bean
+    public Product cdrw1() {
+        return ProductCreator.createProduct("cdrw");
+    }
+
+    @Bean
+    public Product dvdrw1() {
+        return ProductCreator.createProduct("dvdrw");
+    }
+
+    @Bean
+    public ProductCreator productCreatorFactory() {
+        ProductCreator factory = new ProductCreator();
+        HashMap<String, Product> products = new HashMap<>();
+        products.put("aaa", new Battery("AAA", 2.5));
+        products.put("cdrw", new Disc("CD-RW", 1.5));
+        products.put("dvdrw", new Disc("DVD-RW", 3.0));
+        factory.setProducts(products);
+        return factory;
+    }
+
+    @Bean
+    public Product aaa2() {
+        return productCreatorFactory().createProduct("aaa");
+    }
+
 }
