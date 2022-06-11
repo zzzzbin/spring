@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation Query</title>
+</head>
+<body>
+<form method="post">
+    Court Name
+    <input type="text" name="courtName"/>
+    <input type="submit" value="Query"/>
+</form>
+<table border="1">
+    <tr>
+        <th>Court Name</th>
+        <th>Date</th>
+        <th>Hour</th>
+        <th>Player</th>
+    </tr>
+    <th:block th:each="reservation: ${reservations}">
+        <tr>
+            <td>[[${reservation.courtName}]]</td>
+            <td>[[${reservation.date}]]</td>
+            <td>[[${reservation.hour}]]</td>
+            <td>[[${reservation.player.name}]]</td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
