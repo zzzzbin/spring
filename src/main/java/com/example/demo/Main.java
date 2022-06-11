@@ -36,8 +36,8 @@ public class Main {
         cart2.addItem(dvdrw);
         System.out.println("Shopping cart 2 contains " + cart2.getItems());
 
-//        Cashier1 cashier2 = context.getBean(Cashier1.class);
-//        cashier2.checkout(cart2);
+        Cashier1 cashier2 = context.getBean(Cashier1.class);
+        cashier2.checkout(cart2);
 
         Product aaa1 = context.getBean("aaa1", Product.class);
         System.out.println(aaa1);
