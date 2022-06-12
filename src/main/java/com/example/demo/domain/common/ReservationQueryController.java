@@ -15,6 +15,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 
 @Controller
 @RequestMapping("/reservationQuery")
@@ -57,6 +58,18 @@ public class ReservationQueryController {
             log.info("Deferred task ended."+ Thread.currentThread().getName());
             return "reservationQuery";
         };
+    }
+
+    @GetMapping("/all2")
+    public CompletableFuture<String> getAll2(Model model) { //runAsync => void
+        return CompletableFuture.supplyAsync(() -> {
+            log.info("Deferred task started."+ Thread.currentThread().getName());
+            List<Reservation> reservations = reservationService.queryAll();
+            Delayer.randomDelay();
+            model.addAttribute("reservations", reservations);
+            log.info("Deferred task ended."+ Thread.currentThread().getName());
+            return "reservationQuery";
+        }, taskExecutor);
     }
 
 
