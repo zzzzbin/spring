@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
@@ -70,6 +72,26 @@ public class ReservationQueryController {
             log.info("Deferred task ended."+ Thread.currentThread().getName());
             return "reservationQuery";
         }, taskExecutor);
+    }
+
+    @GetMapping("/all3")
+    public ResponseBodyEmitter getAll3(Model model) {
+        final ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+        taskExecutor.execute(() -> {
+            log.info("Deferred task started."+ Thread.currentThread().getName());
+            List<Reservation> reservations = reservationService.queryAll();
+            Delayer.randomDelay();
+            try{
+                for(Reservation reservation: reservations){
+                    emitter.send(reservation);
+                }
+                emitter.complete();
+            } catch (IOException e){
+                emitter.completeWithError(e);
+            }
+            log.info("Deferred task ended."+ Thread.currentThread().getName());
+        });
+        return emitter;
     }
 
 
