@@ -1,19 +1,27 @@
 package com.example.demo.domain.common;
 
 import com.example.demo.domain.common.com.apress.springrecipes.court.Delayer;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/reservationQuery")
+@Slf4j
 public class ReservationQueryController {
     private final ReservationService reservationService;
+    @Autowired
+    private TaskExecutor taskExecutor;
 
     public ReservationQueryController(ReservationService reservationService) {
         this.reservationService = reservationService;
@@ -25,11 +33,17 @@ public class ReservationQueryController {
     }
 
     @GetMapping("/all")
-    public String getAll(Model model) {
-        List<Reservation> reservations =  reservationService.queryAll();
-        Delayer.randomDelay();
-        model.addAttribute("reservations", reservations);
-        return "reservationQuery";
+    public DeferredResult<String> getAll(Model model) {
+        final DeferredResult<String> result = new DeferredResult<>();
+        taskExecutor.execute(() -> {
+            log.info("Deferred task started."+ Thread.currentThread().getName());
+            List<Reservation> reservations = reservationService.queryAll();
+            Delayer.randomDelay();
+            model.addAttribute("reservations", reservations);
+            result.setResult("reservationQuery");
+            log.info("Deferred task ended."+ Thread.currentThread().getName());
+        });
+        return result;
     }
 
 

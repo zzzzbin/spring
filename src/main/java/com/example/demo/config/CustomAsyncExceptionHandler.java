@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Component
-public class AsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
+public class CustomAsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
 
     @Override
     public void handleUncaughtException(Throwable ex, Method method, Object... params) {
