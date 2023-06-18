@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.example.demo.domain.lock.Article;
 import com.example.demo.domain.lock.ArticleRepository;
 import com.example.demo.domain.lock.CommentRepository;
 import com.example.demo.dto.Droid;
@@ -49,12 +48,12 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Article article = new Article();
-        article.setId(1L);
-        article.setCommentCount(0L);
-        article.setTitle("XXXX");
-        article.setVersion(1L);
-        articleRepository.save(article);
-        commentRepository.deleteAll();
+//        Article article = new Article();
+//        article.setId(1L);
+//        article.setCommentCount(0L);
+//        article.setTitle("XXXX");
+//        article.setVersion(1L);
+//        articleRepository.save(article);
+//        commentRepository.deleteAll();
     }
 }

@@ -22,9 +22,9 @@ public class MeasurementInterceptor implements AsyncHandlerInterceptor {
         long startTime = (Long) request.getAttribute(START_TIME);
         request.removeAttribute(START_TIME);
         long endTime = System.currentTimeMillis();
-        System.out.println("Response-Processing-Time: " + (endTime - startTime) + "ms.");
-        System.out.println("Response-Processing-Thread: " + Thread.currentThread().
-                getName());
+//        System.out.println("Response-Processing-Time: " + (endTime - startTime) + "ms.");
+//        System.out.println("Response-Processing-Thread: " + Thread.currentThread().
+//                getName());
     }
 
 
@@ -33,8 +33,8 @@ public class MeasurementInterceptor implements AsyncHandlerInterceptor {
         long startTime = (Long) request.getAttribute(START_TIME);
         request.setAttribute(START_TIME, System.currentTimeMillis());
         long endTime = System.currentTimeMillis();
-        System.out.println("Request-Processing-Time: " + (endTime - startTime) + "ms.");
-        System.out.println("Request-Processing-Thread: " + Thread.currentThread().
-                getName());
+//        System.out.println("Request-Processing-Time: " + (endTime - startTime) + "ms.");
+//        System.out.println("Request-Processing-Thread: " + Thread.currentThread().
+//                getName());
     }
 }
