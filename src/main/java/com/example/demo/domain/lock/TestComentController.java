@@ -13,7 +13,7 @@ public class TestComentController {
     RestTemplate restTemplate;
 
     @GetMapping("/testrest")
-    public void concurrentComment() {
+    public String concurrentComment() {
         String url = "http://localhost:8080/comment";
         for (int i = 0; i < 100; i++) {
             int finalI = i;
@@ -25,5 +25,6 @@ public class TestComentController {
                 System.out.println("result = " + result);
             }).start();
         }
+        return "hello";
     }
 }
