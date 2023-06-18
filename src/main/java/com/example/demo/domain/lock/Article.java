@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
 import lombok.Data;
 
 @Data
@@ -16,4 +17,7 @@ public class Article {
     private String title;
 
     private Long commentCount;
+
+    @Version
+    private Long version;
 }

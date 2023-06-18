@@ -18,9 +18,9 @@ public class CommentService {
 
     @Transactional //You can only lock something in the context of a database transaction.
     public void postComment(Long articleId, String content) {
-//        Optional<Article> articleOptional = articleRepository.findById(articleId);
+        Optional<Article> articleOptional = articleRepository.findById(articleId);
 //        Optional<Article> articleOptional = articleRepository.findArticleForUpdate(articleId);
-        Optional<Article> articleOptional = articleRepository.findArticleWithPessimisticLock(articleId);
+//        Optional<Article> articleOptional = articleRepository.findArticleWithPessimisticLock(articleId);
 
         if (!articleOptional.isPresent()) {
             throw new RuntimeException("no corresponding article");
@@ -34,5 +34,11 @@ public class CommentService {
 
         article.setCommentCount(article.getCommentCount() + 1);
         articleRepository.save(article);
+//        int count = articleRepository.updateArticleWithVersion(article.getId(), article.getCommentCount() + 1, article.getVersion());
+//        log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+ count);
+//        if (count == 0) {
+//            log.info("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+//            throw new RuntimeException("The server is busy, failed to update data");
+//        }
     }
 }

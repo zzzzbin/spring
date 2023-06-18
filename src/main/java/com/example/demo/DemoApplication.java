@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.domain.lock.Article;
 import com.example.demo.domain.lock.ArticleRepository;
+import com.example.demo.domain.lock.CommentRepository;
 import com.example.demo.dto.Droid;
 import com.example.demo.repository.IngredientRepository;
 import com.example.demo.repository.InstructorRepository;
@@ -43,12 +44,17 @@ public class DemoApplication implements CommandLineRunner {
     @Autowired
     ArticleRepository articleRepository;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Article article = new Article();
         article.setId(1L);
         article.setCommentCount(0L);
         article.setTitle("XXXX");
+        article.setVersion(1L);
         articleRepository.save(article);
+        commentRepository.deleteAll();
     }
 }
